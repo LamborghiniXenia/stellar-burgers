@@ -1,23 +1,22 @@
-import { FC, useMemo } from 'react';
-import { Preloader } from '../ui/preloader';
-import { OrderInfoUI } from '../ui/order-info';
-import { TIngredient } from '@utils-types';
+import { FC, useMemo, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { Preloader, OrderInfoUI } from '@ui';
+import { TIngredient, TOrder } from '@utils-types';
+import { selectOrder, selectIngredients } from '@slices';
+import { useAppSelector } from '@storage/hooks';
 
-export const OrderInfo: FC = () => {
-  /** TODO: взять переменные orderData и ingredients из стора */
-  const orderData = {
-    createdAt: '',
-    ingredients: [],
-    _id: '',
-    status: '',
-    name: '',
-    updatedAt: 'string',
-    number: 0
-  };
+interface OrderInfoProps {
+  isModalContext?: boolean;
+}
 
-  const ingredients: TIngredient[] = [];
+export const OrderInfo: FC<OrderInfoProps> = ({
+  isModalContext,
+}) => {
 
-  /* Готовим данные для отображения */
+  const orderData: TOrder | null = useAppSelector(selectOrder);
+  const ingredients: TIngredient[] = useAppSelector(selectIngredients);
+
+    /* Готовим данные для отображения */
   const orderInfo = useMemo(() => {
     if (!orderData || !ingredients.length) return null;
 
@@ -63,5 +62,5 @@ export const OrderInfo: FC = () => {
     return <Preloader />;
   }
 
-  return <OrderInfoUI orderInfo={orderInfo} />;
+  return <OrderInfoUI orderInfo={orderInfo} isModalContext={isModalContext} />;
 };

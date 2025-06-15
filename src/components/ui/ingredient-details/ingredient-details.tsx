@@ -1,14 +1,20 @@
 import React, { FC, memo } from 'react';
 import styles from './ingredient-details.module.css';
 import { IngredientDetailsUIProps } from './type';
+import { INGREDIENT_DETAILS_TITLE } from '@utils/constants';
 
 export const IngredientDetailsUI: FC<IngredientDetailsUIProps> = memo(
-  ({ ingredientData }) => {
+  ({ ingredientData, isModalContext }) => {
     const { name, image_large, calories, proteins, fat, carbohydrates } =
       ingredientData;
 
     return (
-      <div className={styles.content}>
+      <div className={`${styles.content} ${!isModalContext ? styles.modalContent : ''}`}>
+        {!isModalContext && (
+          <h2 className={`${styles.title} text text_type_main-large`}>
+            {INGREDIENT_DETAILS_TITLE}
+          </h2>
+        )}
         <img
           className={styles.img}
           alt='изображение ингредиента.'

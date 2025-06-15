@@ -9,16 +9,22 @@ import styles from './order-info.module.css';
 import { OrderInfoUIProps } from './type';
 import { OrderStatus } from '@components';
 
-export const OrderInfoUI: FC<OrderInfoUIProps> = memo(({ orderInfo }) => (
-  <div className={styles.wrap}>
-    <h3 className={`text text_type_main-medium  pb-3 pt-10 ${styles.header}`}>
+export const OrderInfoUI: FC<OrderInfoUIProps> = memo(
+  ({ orderInfo, isModalContext }) => (
+  <div className={`${styles.wrap} ${!isModalContext ? styles.modalContent : ''}`}>
+    {!isModalContext && (
+      <h2 className={`text ${styles.number}`}>
+            #{orderInfo.number}
+    </h2>
+  )}
+    <h3 className={`text text_type_main-medium  pb-3 ${styles.order_name}`}>
       {orderInfo.name}
     </h3>
     <OrderStatus status={orderInfo.status} />
-    <p className={`text text_type_main-medium pt-15 pb=6`}>Состав:</p>
+    <p className={`text text_type_main-medium pt-15 pb-6`}>Состав:</p>
     <ul className={`${styles.list} mb-8`}>
-      {Object.values(orderInfo.ingredientsInfo).map((item, index) => (
-        <li className={`pb-4 pr-6 ${styles.item}`} key={index}>
+      {Object.values(orderInfo.ingredientsInfo).map((item) => (
+        <li className={`pb-4 pr-6 ${styles.item}`} key={item._id}>
           <div className={styles.img_wrap}>
             <div className={styles.border}>
               <img
