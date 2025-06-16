@@ -13,7 +13,7 @@ export type TIngredient = {
 };
 
 export type TConstructorIngredient = TIngredient & {
-  id: string;
+  uniqueId: string;
 };
 
 export type TOrder = {
@@ -38,3 +38,15 @@ export type TUser = {
 };
 
 export type TTabMode = 'bun' | 'sauce' | 'main';
+
+export type TLoginData = {
+  email: string;
+  password: string;
+};
+
+export const enum RequestStatus {
+  Idle='Idle',
+  Loading='Loading',
+  Success='Success',
+  Failed='Failed',
+}

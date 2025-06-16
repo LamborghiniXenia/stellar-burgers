@@ -14,7 +14,8 @@ export const ResetPasswordUI: FC<ResetPasswordUIProps> = ({
   setPassword,
   handleSubmit,
   token,
-  setToken
+  setToken,
+  isSubmitting
 }) => (
   <main className={styles.container}>
     <div className={`pt-6 ${styles.wrapCenter}`}>
@@ -44,7 +45,7 @@ export const ResetPasswordUI: FC<ResetPasswordUIProps> = ({
           />
         </div>
         <div className={`pb-6 ${styles.button}`}>
-          <Button type='primary' size='medium' htmlType='submit'>
+          <Button type='primary' size='medium' htmlType='submit' disabled={isSubmitting}>
             Сохранить
           </Button>
         </div>

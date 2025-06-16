@@ -22,6 +22,7 @@
 
 .order_name {
   text-align: left;
+  padding-top: 16px;
 }
 
 .order_content {

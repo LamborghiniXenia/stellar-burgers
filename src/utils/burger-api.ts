@@ -1,5 +1,5 @@
 import { setCookie, getCookie } from './cookie';
-import { TIngredient, TOrder, TOrdersData, TUser } from './types';
+import { TIngredient, TLoginData, TOrder, TOrdersData, TUser } from '@utils-types';
 
 const URL = process.env.BURGER_API_URL;
 
@@ -10,7 +10,7 @@ type TServerResponse<T> = {
   success: boolean;
 } & T;
 
-type TRefreshResponse = TServerResponse<{
+export type TRefreshResponse = TServerResponse<{
   refreshToken: string;
   accessToken: string;
 }>;
@@ -61,14 +61,10 @@ type TIngredientsResponse = TServerResponse<{
   data: TIngredient[];
 }>;
 
-type TFeedsResponse = TServerResponse<{
+export type TFeedsResponse = TServerResponse<{
   orders: TOrder[];
   total: number;
   totalToday: number;
-}>;
-
-type TOrdersResponse = TServerResponse<{
-  data: TOrder[];
 }>;
 
 export const getIngredientsApi = () =>
@@ -95,7 +91,7 @@ export const getOrdersApi = () =>
       authorization: getCookie('accessToken')
     } as HeadersInit
   }).then((data) => {
-    if (data?.success) return data.orders;
+    if (data?.success) return data;
     return Promise.reject(data);
   });
 
@@ -156,11 +152,6 @@ export const registerUserApi = (data: TRegisterData) =>
       if (data?.success) return data;
       return Promise.reject(data);
     });
-
-export type TLoginData = {
-  email: string;
-  password: string;
-};
 
 export const loginUserApi = (data: TLoginData) =>
   fetch(`${URL}/auth/login`, {
