@@ -8,10 +8,10 @@ interface FeedState {
   orders: TOrder[];
   total: number;
   totalToday: number;
-  status: RequestStatus;  
+  status: RequestStatus; 
 }
 
-const initialState: FeedState = {
+export const initialState: FeedState = {
     orders: [],
     total: 0,
     totalToday: 0,

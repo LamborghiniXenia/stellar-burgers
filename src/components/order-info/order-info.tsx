@@ -10,7 +10,7 @@ interface OrderInfoProps {
 }
 
 export const OrderInfo: FC<OrderInfoProps> = ({
-  isModalContext,
+  isModalContext, ...rest
 }) => {
 
   const orderData: TOrder | null = useAppSelector(selectOrder);
@@ -62,5 +62,5 @@ export const OrderInfo: FC<OrderInfoProps> = ({
     return <Preloader />;
   }
 
-  return <OrderInfoUI orderInfo={orderInfo} isModalContext={isModalContext} />;
+  return <OrderInfoUI orderInfo={orderInfo} isModalContext={isModalContext} {...rest}/>;
 };

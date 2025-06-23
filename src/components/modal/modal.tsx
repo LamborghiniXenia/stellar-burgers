@@ -2,7 +2,7 @@ import { FC, memo, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 
 import { TModalProps } from './type';
-import { ModalUI } from '@ui';
+import { ModalOverlayUI, ModalUI } from '@ui';
 
 const modalRoot = document.getElementById('modals');
 
@@ -19,9 +19,12 @@ export const Modal: FC<TModalProps> = memo(({ title, onClose, children }) => {
   }, [onClose]);
 
   return ReactDOM.createPortal(
-    <ModalUI title={title} onClose={onClose}>
+    <>
+    <ModalUI title={title} onClose={onClose} data-cy='order-number'>
       {children}
-    </ModalUI>,
+    </ModalUI>
+    <ModalOverlayUI onClick={onClose} data-cy='modal-overlay'/>
+    </>,
     modalRoot as HTMLDivElement
   );
 });

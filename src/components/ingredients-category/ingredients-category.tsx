@@ -8,7 +8,7 @@ import { selectConstructorBun, selectConstructorIngredients } from '@slices';
 export const IngredientsCategory = forwardRef<
   HTMLUListElement,
   TIngredientsCategoryProps
->(({ title, titleRef, ingredients }, ref) => {
+>(({ title, titleRef, ingredients, ...rest }, ref) => {
 
   const bun = useAppSelector(selectConstructorBun);
   const constructorIngredients = useAppSelector(selectConstructorIngredients);
@@ -29,6 +29,7 @@ export const IngredientsCategory = forwardRef<
       ingredients={ingredients}
       ingredientsCounters={ingredientsCounters}
       ref={ref}
+      {...rest}
     />
   );
 });
