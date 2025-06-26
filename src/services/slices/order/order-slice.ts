@@ -13,7 +13,7 @@ type OrderState = {
   status: RequestStatus;
 };
 
-const initialState: OrderState = {
+export const initialState: OrderState = {
   orderByNumber: null, //загрузка заказа по номеру - хранится объект с заказом
   currentOrder: null,
   orderRequest: false, // для генерации модального окна - запрос на создание заказа

@@ -3,7 +3,6 @@ import { RequestStatus, TUser } from "@utils-types"
 import { getUser, loginUser, logoutUser, updateUser, registerUser, forgotPassword, resetPassword } from "@thunk"
 import { USER_SLICE_NAME } from "@utils/constants"
 import { isActionPending, isActionRejected } from "@utils/redux"
-import { stat } from "fs"
 
 interface UserState {
     user: TUser | null;
@@ -13,7 +12,7 @@ interface UserState {
     resetPasswordStatus: RequestStatus; // Состояние для resetPassword
 }
 
-const initialState: UserState = {
+export const initialState: UserState = {
     user: null,
     userCheck: false,
     status: RequestStatus.Idle,
@@ -60,9 +59,11 @@ export const userSlice = createSlice({
             })
             .addCase(forgotPassword.fulfilled, (state) => {
                 state.forgotPasswordStatus = RequestStatus.Success;
+                state.status = RequestStatus.Success;
             })
             .addCase(resetPassword.fulfilled, (state) => {
                 state.resetPasswordStatus = RequestStatus.Success;
+                state.status = RequestStatus.Success;
             })
             .addMatcher(isActionPending(USER_SLICE_NAME), state => {
                 state.status = RequestStatus.Loading;

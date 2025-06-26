@@ -35,7 +35,7 @@ const App = () => {
   const handleModalClose = () => {
     navigate(-1);
   };
-
+  
   useEffect(() => { 
     dispatch(getUser())
       .unwrap()
@@ -55,7 +55,7 @@ const App = () => {
     const path = location.pathname.split('/');
     const numberIndex = path.indexOf('feed') + 1 || path.indexOf('orders') + 1;
     const orderNumber = numberIndex > 0 ? path[numberIndex]: null;
-  
+
     if (orderNumber &&(!orderData || orderData.number !== parseInt(orderNumber))) {
       dispatch(getOrder(parseInt(orderNumber)))
       .unwrap()
@@ -70,7 +70,7 @@ const App = () => {
     <div className={styles.app}>
       <AppHeader />
       <Routes location={background || location}>
-        <Route path='/' element={<ConstructorPage />} />
+        <Route path='/' element={<ConstructorPage/>} />
         <Route path='/feed' element={<Feed />} />
         <Route path='/login' element={<ProtectedRoute isPublic><Login /></ProtectedRoute>}/>
         <Route path='/register' element={<ProtectedRoute isPublic><Register/></ProtectedRoute>}/>
@@ -81,7 +81,7 @@ const App = () => {
         <Route path='*' element={<NotFound404 />} />
         <Route path='/feed/:number' element={<OrderInfo isModalContext={false} />}/>
         <Route path='/ingredients/:id' element={<IngredientDetails isModalContext={false} />}/>
-        <Route path='/profile/orders/:number' element={<ProtectedRoute><OrderInfo isModalContext={false} /></ProtectedRoute>}/>
+        <Route path='/profile/orders/:number' element={<ProtectedRoute><OrderInfo isModalContext={false}/></ProtectedRoute>}/>
       </Routes>
 
       {background && (

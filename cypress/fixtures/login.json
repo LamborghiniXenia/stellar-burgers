@@ -1,0 +1,6 @@
+{
+    "success": true,
+    "accessToken": "Bearer fakeToken",
+    "refreshToken": "fakeToken",
+    "user": { "email": "test@ya.ru", "name": "Жак" }
+}

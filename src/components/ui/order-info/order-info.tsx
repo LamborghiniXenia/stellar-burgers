@@ -10,11 +10,11 @@ import { OrderInfoUIProps } from './type';
 import { OrderStatus } from '@components';
 
 export const OrderInfoUI: FC<OrderInfoUIProps> = memo(
-  ({ orderInfo, isModalContext }) => (
+  ({ orderInfo, isModalContext, ...rest }) => (
   <div className={`${styles.wrap} ${!isModalContext ? styles.modalContent : ''}`}>
     {!isModalContext && (
-      <h2 className={`text ${styles.number}`}>
-            #{orderInfo.number}
+      <h2 className={`text ${styles.number}`} {...rest}>
+            {orderInfo.number}
     </h2>
   )}
     <h3 className={`text text_type_main-medium  pb-3 ${styles.order_name}`}>

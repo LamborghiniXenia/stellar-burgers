@@ -8,7 +8,7 @@ interface IngredientsState {
     status: RequestStatus;    
 }
 
-const initialState: IngredientsState = {
+export const initialState: IngredientsState = {
     ingredients: [],
     status: RequestStatus.Idle,
 }
